@@ -1,0 +1,55 @@
+import logging
+log = logging.getLogger(__name__)
+
+import os
+import json
+import importlib
+
+import www
+
+
+class Data:
+
+    _conf = {}
+    _connections = {}
+    _providers = {}
+
+    def __init__(self):
+        conf_path = os.path.join(
+            os.path.dirname(www.__file__),
+            'etc',
+            'app',
+            'data.json'
+        )
+        log.debug('using config: ' + conf_path)
+
+        try:
+            if (os.path.isfile(conf_path)):
+                self._conf = json.loads(open(conf_path, 'r').read())
+                # for c in conf['providers']:
+                #     key = c['name'] if 'name' in c else ''
+                #     if (key != ''):
+                #         self._config[key] = c
+        except IOError as e:
+            log.error(e)
+
+    def get_config(self, key):
+        return self._config[key] if key in self._config else False
+
+    def _get_provider_config(self, key):
+        try:
+            return self._conf['providers']['key']
+        except KeyError:
+            log.error('provider %s configuration not found')
+            return false
+
+    def get_data_provider(self, key):
+        try:
+            return self._providers[key]
+        except KeyError:
+            config = self._get_provider_config(key)
+            if (config):
+                module = importlib.import_module(config['module'], config['package'])
+
+
+    

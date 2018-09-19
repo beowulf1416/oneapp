@@ -1,0 +1,31 @@
+# /etc/systemd/system/pyramid.service
+# https://docs.pylonsproject.org/projects/pyramid-cookbook/en/latest/deployment/uwsgi_nginx_systemd.html
+
+[Unit]
+Description=pyramid app
+
+# Requirements
+Requires=network.target
+
+# Dependency ordering
+After=network.target
+
+[Service]
+TimeoutStartSec=0
+RestartSec=10
+Restart=always
+
+# path to app
+WorkingDirectory=/home/ferd/work/personal/app/v2/backend/www
+# the user that you want to run app by
+User=www-data
+
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+# Main process
+ExecStart=/usr/bin/uwsgi --plugin python3 --ini-paste-logged /home/ferd/work/personal/app/v2/backend/www/development.ini -H /home/ferd/env/app
+
+[Install]
+WantedBy=multi-user.target
