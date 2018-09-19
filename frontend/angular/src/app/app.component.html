@@ -1,0 +1,37 @@
+<div id="wrapper-app">
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md2 mr-0" href="#">{{app_name}}</a>
+    <input class="form-control form-control-dark w-100" type="search" placeholder="Search" aria-label="Search" />
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Sign out</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/admin/permissions">Permissions</a>
+            </li>
+          </ul><!-- .nav -->
+        </div><!-- .sidebar-sticky -->
+      </nav><!-- .sidebar -->
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
+        <div class="wrapper-messages" *ngFor="let message of (messages$ | async)">
+          <div class="message">{{ message | json }}</div>
+        </div><!-- .wrapper-messages -->
+        <div class="container-fluid">
+          <div class="row">
+            <router-outlet></router-outlet>
+          </div><!-- .row -->
+        </div><!-- .container-fluid -->
+      </main>
+    </div><!-- .row -->
+  </div><!-- .container-fluid -->
+</div><!-- #wrapper-app -->
