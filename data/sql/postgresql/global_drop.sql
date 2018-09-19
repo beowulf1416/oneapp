@@ -1,0 +1,1 @@
+\ir security/drop.sql
