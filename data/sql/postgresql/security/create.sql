@@ -1,6 +1,7 @@
 create schema security;
 set schema 'security';
 
+-- tables
 \ir tables/signups.sql
 \ir tables/users.sql
 \ir tables/permissions.sql
@@ -10,6 +11,9 @@ set schema 'security';
 \ir tables/user_roles.sql
 \ir tables/role_permissions.sql
 
+\ir tables/user_clients.sql
+
+-- functions
 \ir functions/add_signup.sql
 \ir functions/get_signup_from_email.sql
 \ir functions/get_signup_from_token.sql
@@ -32,3 +36,9 @@ set schema 'security';
 \ir functions/role_create.sql
 \ir functions/role_get.sql
 \ir functions/roles_get.sql
+
+/* users */
+\ir functions/users_get.sql
+\ir functions/user_get.sql
+\ir functions/add_user_to_client.sql
+\ir functions/remove_user_from_clients.sql
