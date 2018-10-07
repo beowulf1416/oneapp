@@ -1,13 +1,20 @@
 <div id="wrapper-signin">
-  <form (submit)="signin()">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required placeholder="Email" [(ngModel)]="form.email" />
-    </div><!-- .form-group -->
-    <div class="form-group">
-      <label for="pw">Password</label>
-      <input type="password" id="pw" name="pw" required placeholder="Password" [(ngModel)]="form.pw" />
-    </div><!-- .form-group -->
-    <button type="submit" class="btn btn-primary">Sign In</button>
-  </form>
+  <main role="main">
+    <form class="form-signin col-sm-4 mx-auto" (submit)="signin()">
+      <caption class="text-nowrap"><h3>Sign In</h3></caption>
+      <mat-form-field class="form-group form-group-vertical">
+        <input type="email" id="email" name="email" required placeholder="Email" matInput [(ngModel)]="form.email" />
+      </mat-form-field>
+      <mat-form-field class="form-group form-group-vertical">
+        <input type="password" id="pw" name="pw" required placeholder="Password" matInput [(ngModel)]="form.pw" />
+      </mat-form-field>
+      <button type="submit" class="btn btn-primary">Sign In</button>
+      <nav>
+        <ul class="nav flex-column">
+          <li class="nav-item"><a title="Sign Up" routerLink="/user/signup">Sign up</a></li>
+          <li class="nav-item"><a title="Forgot Password" routerLink="/user/forgot-pw">Forgot Password</a></li>
+        </ul>
+      </nav>
+    </form>
+  </main>
 </div><!-- #wrapper-signin -->

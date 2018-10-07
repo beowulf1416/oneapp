@@ -1,3 +1,9 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+form .form-group-vertical {
+    display: block;
+}
+
 /* navbar */
 .navbar-brand {
     padding-top: .75rem;
@@ -5,6 +11,11 @@
     font-size: 1rem;
     background-color: rgba(0, 0, 0, .25);
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .form {
+    padding: 0;
+    border: 0;
 }
 
 .navbar .form-control {
@@ -23,6 +34,15 @@
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
+
+.navbar #menu-top {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#sidenav-nav {
+    padding-top: 50px;
+}
 
 main[role=main] {
     padding-top: 48px;

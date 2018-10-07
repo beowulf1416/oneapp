@@ -1,37 +1,61 @@
 <div id="wrapper-app">
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md2 mr-0" href="#">{{app_name}}</a>
-    <input class="form-control form-control-dark w-100" type="search" placeholder="Search" aria-label="Search" />
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/" (click)="sidenav.toggle()">{{app_name}}</a>
+    <form class="form-inline form-search w-100">
+      <input type="search" 
+        class="form-control form-control-dark w-100" 
+        placeholder="Search" 
+        aria-label="Search" />
+    </form>
+    <ul id="menu-top" class="nav">
+      <li class="nav-item dropdown text-nowrap">
+        <a id="nav-dropdown" 
+          class="dropdown-toggle" 
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+          <i class="material-icons">supervised_user_circle</i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="nav-dropdown">
+          <div *ngIf="user$ | async as user">
+            <a class="dropdown-item" routerLink="/user/signin" *ngIf="!user.is_signed_in">Sign In</a>
+            <a class="dropdown-item" routerLink="/user/signout" *ngIf="user.is_signed_in">Sign Out</a>
+          </div>
+        </div>
       </li>
-    </ul>
+    </ul><!-- #menu-top -->
   </nav>
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" routerLink="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" routerLink="/admin/permissions">Permissions</a>
-            </li>
-          </ul><!-- .nav -->
-        </div><!-- .sidebar-sticky -->
-      </nav><!-- .sidebar -->
-      <main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
-        <div class="wrapper-messages" *ngFor="let message of (messages$ | async)">
-          <div class="message">{{ message | json }}</div>
-        </div><!-- .wrapper-messages -->
-        <div class="container-fluid">
-          <div class="row">
-            <router-outlet></router-outlet>
-          </div><!-- .row -->
-        </div><!-- .container-fluid -->
-      </main>
-    </div><!-- .row -->
-  </div><!-- .container-fluid -->
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav id="sidenav-nav" class="col-sm-3 col-md-2 mr-0">
+      <nav>
+        <ul class="nav flex-column" *ngIf="user$ | async as user">
+          <li><a title="Sign In" class="nav-link active" routerLink="/user/signin" *ngIf="!user.is_signed_in" (click)="sidenav.toggle()">Sign In</a></li>
+          <li><a title="Sign Out" class="nav-link active" routerLink="/user/signout" *ngIf="user.is_signed_in" (click)="sidenav.toggle()">Sign Out</a></li>
+        </ul><!-- .nav -->
+        <ul class="nav flex-column">
+          <li class="nav-item"><a title="Accounting" class="nav-link active" href="/accounting" (click)="sidenav.toggle()">Accounting</a></li>
+          <li class="nav-item"><a title="GIS" class="nav-link active" routerLink="/gis" (click)="sidenav.toggle()">GIS</a></li>
+          <li class="nav-item"><a title="Inventory" class="nav-link active" routerLink="/inventory" (click)="sidenav.toggle()">Inventory</a></li>
+          <li class="nav-item"><a title="Work" class="nav-link active" routerLink="/work" (click)="sidenav.toggle()">Work</a></li>
+          <li>
+            Admin
+            <ul class="nav flex-column">
+              <li class="nav-item"><a title="Clients" class="nav-link active" routerLink="/admin/clients" (click)="sidenav.toggle()">Clients</a></li>
+              <li class="nav-item"><a title="Security" class="nav-link active" routerLink="/admin/security" (click)="sidenav.toggle()">Security</a></li>
+              <li class="nav-item"><a title="Data" class="nav-link active" routerLink="/admin/data" (click)="sidenav.toggle()">Data</a></li>
+            </ul><!-- .nav -->
+          </li>
+        </ul><!-- .nav -->
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="container-fluid">
+        <div class="row">
+          <router-outlet></router-outlet>
+        </div><!-- .row -->
+      </div><!-- .container-fluid -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div><!-- #wrapper-app -->

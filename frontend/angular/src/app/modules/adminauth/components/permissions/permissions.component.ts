@@ -13,6 +13,8 @@ export class PermissionsComponent implements OnInit {
 
   permissions = [];
   page = {
+    order: '',
+    direction: '',
     items: 10,
     offset: 0
   };
@@ -25,7 +27,7 @@ export class PermissionsComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Permissions');
-    this.security.get_permissions(this.page.items, this.page.offset).subscribe((r: ApiResult) => {
+    this.security.get_permissions(this.page.order, this.page.direction, this.page.items, this.page.offset).subscribe((r: ApiResult) => {
       if (r.status) {
         if (r.data && r.data.permissions) {
           this.permissions = r.data.permissions;
@@ -39,6 +41,6 @@ export class PermissionsComponent implements OnInit {
   }
 
   new() {
-    this.router.navigate(['admin', 'permissions', 'new']);
+    this.router.navigate(['admin', 'security', 'permissions', 'new']);
   }
 }

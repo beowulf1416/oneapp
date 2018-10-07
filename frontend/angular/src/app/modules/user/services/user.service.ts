@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { ApiResult } from '../../../classes/api-result';
-import { URLS } from '../classes/urls';
+import { ModuleURLS } from '../classes/module-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +15,19 @@ export class UserService {
   ) { }
 
   sign_up(email: string): Observable<ApiResult> {
-    return this.http.post<ApiResult>(URLS.api_sign_up, JSON.stringify({
+    return this.http.post<ApiResult>(ModuleURLS.api_sign_up, JSON.stringify({
       email: email
     }));
   }
 
   fetch_email(token: string): Observable<ApiResult> {
-    return this.http.post<ApiResult>(URLS.api_email_from_token, JSON.stringify({
+    return this.http.post<ApiResult>(ModuleURLS.api_email_from_token, JSON.stringify({
       token: token
     }));
   }
 
   update_verified(token: string, password: string): Observable<ApiResult> {
-    return this.http.post<ApiResult>(URLS.api_verify_token, JSON.stringify({
+    return this.http.post<ApiResult>(ModuleURLS.api_verify_token, JSON.stringify({
       token: token,
       password: password
     }));

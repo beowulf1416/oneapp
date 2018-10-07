@@ -62,7 +62,7 @@ export class PermissionComponent implements OnInit {
       if (r.status) {
         // if (r.data && r.data.permission) {
           // const permission = r.data.permission;
-          this.router.navigate(['admin', 'permissions']);
+          this.router.navigate(['admin', 'security', 'permissions']);
         // } else {
         //   console.log(r);
         // }

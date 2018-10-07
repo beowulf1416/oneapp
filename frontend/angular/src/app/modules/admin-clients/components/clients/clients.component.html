@@ -1,0 +1,37 @@
+<div id="wrapper-clients">
+  <h2>Clients</h2>
+  <div class="btn-toolbar" role="toolbar" aria-label="Clients Actions">
+    <div class="btn-group mr-2" role="group" aria-label="Important">
+      <button type="button" class="btn btn-secondary" (click)="new()">New</button>
+    </div><!-- .btn-group -->
+  </div><!-- .btn-toolbar -->
+  <form>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td>
+            <nav class="pager" aria-label="pager">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#" title="Previous">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#" title="Next">Next</a></li>
+              </ul><!-- .pagination -->
+            </nav><!-- .pager -->
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr *ngFor="let c of clients">
+          <td>{{ c.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div><!-- #wrapper-clients -->

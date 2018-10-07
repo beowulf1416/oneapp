@@ -10,6 +10,35 @@ const routes: Routes = [
   {
     path: '',
     component: WelcomeComponent
+  },
+  {
+    path: 'user',
+    loadChildren: './modules/user/user.module#UserModule'
+  },
+  {
+    path: 'admin',
+    children: [
+      {
+        path: 'clients',
+        loadChildren: './modules/admin-clients/admin-clients.module#AdminClientsModule'
+      },
+      {
+        path: 'security',
+        loadChildren: './modules/adminauth/adminauth.module#AdminauthModule'
+      }
+    ]
+  },
+  {
+    path: 'inventory',
+    loadChildren: './modules/inventory/inventory.module#InventoryModule'
+  },
+  {
+    path: 'gis',
+    loadChildren: './modules/gis/gis.module#GisModule'
+  },
+  {
+    path: 'work',
+    loadChildren: './modules/work/work.module#WorkModule'
   }
 ];
 

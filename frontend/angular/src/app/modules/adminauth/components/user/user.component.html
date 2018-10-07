@@ -1,0 +1,39 @@
+<div id="wrapper-user">
+  <h2>User</h2>
+  <div class="btn-toolbar" role="toolbar" aria-label="User Actions">
+    <div class="btn-group mr-2" role="group" aria-label="Important">
+      <button type="button" class="btn btn-secondary" (click)="new()">New</button>
+      <button type="button" class="btn btn-secondary" (click)="save()">Save</button>
+    </div><!-- .btn-group -->
+    <div class="btn-group" role="group" aria-label="Important" *ngIf="form.id != ''">
+      <button type="button" class="btn btn-secondary" (click)="roles()">Roles</button>
+    </div><!-- .btn-group -->
+  </div><!-- .btn-toolbar -->
+  <form>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" required placeholder="Email" [(ngModel)]="form.email" />
+    </div><!-- .form-group -->
+    <div class="form-group">
+      <label for="active">Active</label>
+      <input type="checkbox" id="active" name="active" value="true" [(ngModel)]="form.active" />
+    </div><!-- .form-group -->
+    <div class="form-group">
+      <label for="clients">Clients</label>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of clients; i as index;">
+            <td><input type="checkbox" id="client-{{c.id}}" name="clients-{{c.id}}" (change)="change($event, c)" /></td>
+            <td>{{ c.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- .form-group -->
+  </form>
+</div><!-- #wrapper-user -->

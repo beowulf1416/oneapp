@@ -1,9 +1,11 @@
 <div id="wrapper-signup">
-  <form (ngSubmit)="submit()">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required placeholder="Email" [(ngModel)]="form.email" />
-    </div><!-- .form-group -->
-    <button type="submit">Sign Up</button>
-  </form>
+  <main role="main">
+    <form class="col-sm-4 mx-auto" (ngSubmit)="submit()">
+      <caption class="text-nowrap"><h3>Sign Up</h3></caption>
+      <mat-form-field class="form-group form-group-vertical">
+        <input type="email" id="email" name="email" required placeholder="Email" matInput [(ngModel)]="form.email" />
+      </mat-form-field>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+  </main>
 </div><!-- #wrapper-signup -->

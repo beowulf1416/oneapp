@@ -1,17 +1,20 @@
 <div id="wrapper-verify">
-  <form (submit)="submit()">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" readonly [(ngModel)]="form.email" />
-    </div><!-- .form-group -->
-    <div class="form-group">
-      <label for="pw1">Password</label>
-      <input type="password" id="pw1" name="pw1" required placeholder="Password" [(ngModel)]="form.pw1" />
-    </div><!-- .form-group -->
-    <div class="form-group">
-      <label for="pw2">Confirm Password</label>
-      <input type="password" id="pw2" name="pw2" required placeholder="Confirm Password" [(ngModel)]="form.pw2" />
-    </div><!-- .form-group -->
-    <button type="submit">Submit</button>
-  </form>
+  <main role="main">
+    <form class="col-sm-4 mx-auto" (submit)="submit()">
+      <caption class="text-nowrap"><h3>Sign Up</h3></caption>
+      <div class="form-group form-group-vertical">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" readonly [(ngModel)]="form.email" />
+      </div><!-- .form-group -->
+      <div class="form-group form-group-vertical">
+        <label for="pw1">Password</label>
+        <input type="password" id="pw1" name="pw1" required placeholder="Password" [(ngModel)]="form.pw1" />
+      </div><!-- .form-group -->
+      <div class="form-group form-group-vertical">
+        <label for="pw2">Confirm Password</label>
+        <input type="password" id="pw2" name="pw2" required placeholder="Confirm Password" [(ngModel)]="form.pw2" />
+        </div><!-- .form-group -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </main>
 </div><!-- #wrapper-verify -->

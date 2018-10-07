@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 
 import { Store, select } from '@ngrx/store';
 
-import { Observable, NextObserver, observable } from 'rxjs';
+import { Observable, NextObserver } from 'rxjs';
 
-import { State } from '../classes/state';
+import { State } from '../classes/reducers/user';
 import { User } from '../classes/user';
 import { ApiResult } from '../classes/api-result';
 import { URLS } from '../classes/urls';
-import { UserActions } from '../classes/reducers/user';
+// import { UserActions } from '../classes/reducers/user';
+import * as userActions from '../classes/actions/user';
 
 
 function get_session_storage(): any {
@@ -31,13 +32,13 @@ export class UserService {
       select((state: State) => state.user)
     );
 
-    this.get_current_user().subscribe((r: ApiResult) => {
-      if (r.status) {
-        console.log(r);
-      } else {
-        console.error(r);
-      }
-    });
+    // this.get_current_user().subscribe((r: ApiResult) => {
+    //   if (r.status) {
+    //     console.log(r);
+    //   } else {
+    //     console.error(r);
+    //   }
+    // });
   }
 
   get_current_user(): Observable<ApiResult> {
@@ -59,10 +60,11 @@ export class UserService {
           const session = get_session_storage();
           session.setItem('token', token);
 
-          this.s.dispatch({
-            type: UserActions.USER_SIGNED_IN,
-            payload: user
-          });
+          // this.s.dispatch({
+          //   type: UserActions.USER_SIGNED_IN,
+          //   payload: user
+          // });
+          this.s.dispatch(new userActions.SignIn(new User(token, email)));
         } else {
           console.error(r);
         }

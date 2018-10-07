@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { State } from '../classes/state';
+// import { State } from '../classes/state';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { MessageActions, MessageTypes } from '../classes/reducers/messages';
-import { Message } from '../classes/message';
+// import { MessageActions, MessageTypes } from '../classes/reducers/messages';
+
+import { State } from '../classes/reducers/messages';
+import * as messageActions from '../classes/actions/messages';
+import { Message, MessageType } from '../classes/message';
 
 @Injectable({
   providedIn: 'root'
@@ -25,25 +28,35 @@ export class MessagesService {
   }
 
   info(msg: string) {
-    this.s.dispatch({
-      type: MessageActions.ADD_MESSAGE,
-      payload: {
-        id: this.generate_id(),
-        message: msg,
-        type: MessageTypes.INFO
-      }
-    });
+    // this.s.dispatch({
+    //   type: MessageActions.ADD_MESSAGE,
+    //   payload: {
+    //     id: this.generate_id(),
+    //     message: msg,
+    //     type: MessageTypes.INFO
+    //   }
+    // });
+    this.s.dispatch(new messageActions.MessageAdd(new Message(
+      this.generate_id(),
+      msg,
+      MessageType.INFO
+    )));
   }
 
   error(msg: string) {
-    this.s.dispatch({
-      type: MessageActions.ADD_MESSAGE,
-      payload: {
-        id: this.generate_id(),
-        message: msg,
-        type: MessageTypes.ERROR
-      }
-    });
+    // this.s.dispatch({
+    //   type: MessageActions.ADD_MESSAGE,
+    //   payload: {
+    //     id: this.generate_id(),
+    //     message: msg,
+    //     type: MessageTypes.ERROR
+    //   }
+    // });
+    this.s.dispatch(new messageActions.MessageAdd(new Message(
+      this.generate_id(),
+      msg,
+      MessageType.ERROR
+    )));
   }
 
   // add(msg: string, type: MessageTypes) {
@@ -58,11 +71,12 @@ export class MessagesService {
   // }
 
   remove(id: string) {
-    this.s.dispatch({
-      type: MessageActions.REMOVE_MESSAGE,
-      payload: {
-        id: id
-      }
-    });
+    // this.s.dispatch({
+    //   type: MessageActions.REMOVE_MESSAGE,
+    //   payload: {
+    //     id: id
+    //   }
+    // });
+    this.s.dispatch(new messageActions.MessageRemove(id));
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { UserService } from './services/user.service';
 import { Observable } from 'rxjs';
 import { User } from './classes/user';
@@ -15,6 +16,8 @@ export class AppComponent implements OnInit {
 
   app_name = 'APP';
 
+  sidenav_open = false;
+
   private user$: Observable<User>;
   private messages$: Observable<Array<Message>>;
 
@@ -28,5 +31,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.user.user_test();
+  }
+
+  toggle_sidenav() {
+    this.sidenav_open = !this.sidenav_open;
+    console.log(this.sidenav_open);
   }
 }

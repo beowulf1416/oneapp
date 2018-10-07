@@ -1,0 +1,15 @@
+<div id="wrapper-admin-auth-main">
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a title="Security Home" class="nav-link active" routerLink="./">Auth Home</a></li>
+        <li class="nav-item"><a title="Users" class="nav-link active" routerLink="./users">Users</a></li>
+        <li class="nav-item"><a title="Roles" class="nav-link active" routerLink="./roles">Roles</a></li>
+        <li class="nav-item"><a title="Permissions" class="nav-link active" routerLink="./permissions">Permissions</a></li>
+      </ul><!-- .nav -->
+    </div><!-- .sidebar-sticky -->
+  </nav>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <router-outlet></router-outlet>
+  </main>
+</div><!-- #wrapper-admin-auth-main -->

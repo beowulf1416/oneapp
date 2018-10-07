@@ -1,0 +1,38 @@
+<div class="wrapper-project">
+  <h2>Projects</h2>
+  <div class="btn-toolbar" role="toolbar" aria-label="Clients Actions">
+    <div class="btn-group mr-2" role="group" aria-label="Important">
+      <button type="button" class="btn btn-secondary" (click)="new()">New</button>
+    </div><!-- .btn-group -->
+  </div><!-- .btn-toolbar -->
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="Name" />
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Description" />
+        </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tasks
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="wrapper-tasks">
+        <div class="container-fluid" style="display: block;">
+          
+        </div><!-- .container-fluid -->
+      </div><!-- .wrapper-tasks -->
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div><!-- .wrapper-project -->

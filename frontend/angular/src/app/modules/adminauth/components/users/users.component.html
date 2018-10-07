@@ -1,0 +1,39 @@
+<div id="wrapper-users">
+  <h2>Users</h2>
+  <div class="btn-toolbar" role="toolbar" aria-label="Users Actions">
+    <div class="btn-group mr-2" role="group" aria-label="Important">
+      <button type="button" class="btn btn-secondary" (click)="new()">New</button>
+    </div><!-- .btn-group -->
+  </div><!-- .btn-toolbar -->
+  <form>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Actions</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="2">
+            <nav class="pager" aria-label="pager">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#" title="Previous">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#" title="Next">Next</a></li>
+              </ul><!-- .pagination -->
+            </nav><!-- .pager -->
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td></td>
+          <td><a class="nav nav-link" title="{{u.email}}" routerLink="/admin/security/users/{{ u.id }}">{{ u.email }}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div><!-- #wrapper-users -->

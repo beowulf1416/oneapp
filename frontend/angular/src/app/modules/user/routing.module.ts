@@ -9,40 +9,40 @@ import { PasswordComponent } from './components/password/password.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SignoutComponent } from './components/signout/signout.component';
 import { VerifyComponent } from './components/verify/verify.component';
+import { ForgotPwComponent } from './components/forgot-pw/forgot-pw.component';
 
 
 const routes: Routes = [
   {
-    path: 'user',
+    path: 'signout',
+    canActivate: [ AuthGuard ],
+    component: SignoutComponent
+  },
+  {
+    path: 'signup',
     children: [
       {
-        path: 'signout',
-        canActivate: [ AuthGuard ],
-        component: SignoutComponent
+        path: '',
+        component: SignupComponent
       },
       {
-        path: 'signup',
-        children: [
-          {
-            path: '',
-            component: SignupComponent
-          },
-          {
-            path: ':token',
-            component: VerifyComponent
-          }
-        ]
-      },
-      {
-        path: 'signin',
-        component: SigninComponent
-      },
-      {
-        path: 'change-password',
-        canActivate: [ AuthGuard ],
-        component: PasswordComponent
+        path: ':token',
+        component: VerifyComponent
       }
     ]
+  },
+  {
+    path: 'signin',
+    component: SigninComponent
+  },
+  {
+    path: 'change-password',
+    canActivate: [ AuthGuard ],
+    component: PasswordComponent
+  },
+  {
+    path: 'forgot-pw',
+    component: ForgotPwComponent
   }
 ];
 
