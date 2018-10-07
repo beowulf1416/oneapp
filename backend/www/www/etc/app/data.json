@@ -19,6 +19,11 @@
             "module": "provider",
             "package": "www.core.modules.admin.security",
             "connection": "default"
+        },
+        "admin.clients": {
+            "module": "provider",
+            "package": "www.core.modules.admin.clients",
+            "connection": "default"
         }
     }
 }

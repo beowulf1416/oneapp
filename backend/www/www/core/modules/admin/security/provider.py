@@ -94,3 +94,39 @@ class SecurityDataProvider(Provider):
         except Exception as e:
             log.error(e)
             raise e
+
+    def users_get(self, order, direction, items, offset):
+        sql = 'select * from security.users_get(%s, %s, %s,%s)'
+        try:
+            result = self.fetch_all(sql, (order, direction, items, offset))
+            users = []
+            for r in result:
+                (user_id, active, created, email) = r
+                users.append({
+                    'id': user_id,
+                    'active': active,
+                    'created': created,
+                    'email': email
+                })
+            return users
+        except Exception as e:
+            log.error(e)
+            raise e
+
+    def user_get(self, id):
+        sql = 'select * from security.user_get(%s)'
+        try:
+            result = self.fetch_one(sql, (id, ))
+            return result
+        except Exception as e:
+            log.error(e)
+            raise e
+
+    def user_create(self, email):
+        sql = 'select * from security.user_create(%s)'
+        try:
+            result = self.fetch_one(sql, (email, ))
+            return result
+        except Exception as e:
+            log.error(e)
+            raise e

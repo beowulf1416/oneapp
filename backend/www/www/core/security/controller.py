@@ -7,6 +7,7 @@ import jwt
 import secrets
 
 from www.core.security.mail import Mail
+from www.core.security.common.user import UserOperations
 
 
 @view_config(
@@ -20,64 +21,10 @@ def view_user_signup(request):
     params = request.json_body
     email = params['email'] if 'email' in params else ''
 
-    if (email == ''):
-        return {
-            'status': False,
-            'errors': [
-                'Email address is required'
-            ]
-        }
-
     try:
-        d = request.data
-        dp = d.get_data_provider('authentication')
-
-        # check if email is already registered
-        user = dp.get_user_by_email(email)
-        if (user):
-            return {
-                'status': False,
-                'errors': [
-                    'Email %s is already registered' % (Email)
-                ]
-            }
-        else:
-            # check if email is already in signups
-            signup = dp.get_signup_from_email(email)
-            log.debug(signup)
-            if (signup):
-                (email, token, created_ts, verified_ts) = signup
-                if (verified_ts):
-                    return {
-                        'status': False,
-                        'errors': [
-                            'Email %s is already signed up but not yet verified' % (email)
-                        ]
-                    }
-                else:
-                    token = dp.update_signup_token(email)
-
-                    mail = Mail(request)
-                    mail.signup(email, token)
-
-                    return {
-                        'status': True,
-                        'messages': [
-                            'An email has been sent to %s containing a link to verify this signup.' % (email)
-                        ]
-                    }
-            else:
-                token = dp.get_signup_token(email)
-
-                mail = Mail(request)
-                mail.signup(email, token)
-
-                return {
-                    'status': True,
-                    'messages': [
-                        'An email has been sent to %s containing a link to verify this signup' % (email)
-                    ]
-                }
+        uo = UserOperations()
+        result = uo.signup_create(request.data, Mail(request), email)
+        return result
     except Exception as e:
         log.error(e)
         return {
@@ -336,18 +283,3 @@ def view_user_current(request):
                 str(e)
             ]
         }
-
-
-@view_config(
-    route_name='user_test',
-    request_method=('POST','OPTIONS'),
-    renderer='json',
-    permission='user.test'
-)
-def view_user_test(request):
-    log.debug('view_user_test')
-
-    return {
-        'status': False,
-        'errors': [ '//todo' ]
-    }

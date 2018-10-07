@@ -5,37 +5,32 @@ log = logging.getLogger(__name__)
 def add_routes(config):
     config.add_route(
         name='user_signup',
-        pattern='/user/signup'
+        pattern='/api/user/signup'
     )
 
     config.add_route(
         name='user_token_email',
-        pattern='/user/token/email'
+        pattern='/api/user/token/email'
     )
 
     config.add_route(
         name='user_verify_token',
-        pattern='/user/verify/token'
+        pattern='/api/user/verify/token'
     )
 
     config.add_route(
         name='user_signin',
-        pattern='/user/signin'
+        pattern='/api/user/signin'
     )
 
     config.add_route(
         name='user_signout',
-        pattern='/user/signout'
+        pattern='/api/user/signout'
     )
 
     config.add_route(
         name='user_current',
-        pattern='/user/current'
-    )
-
-    config.add_route(
-        name='user_test',
-        pattern='/user/test'
+        pattern='/api/user/current'
     )
 
 

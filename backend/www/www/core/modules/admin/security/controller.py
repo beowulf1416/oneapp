@@ -3,6 +3,10 @@ log = logging.getLogger(__name__)
 
 from pyramid.view import view_config
 
+from www.core.security.mail import Mail
+from www.core.security.common.user import UserOperations
+
+
 #permissions
 @view_config(
     route_name='admin_security_permission_create',
@@ -110,7 +114,7 @@ def view_admin_security_permissions_all(request):
     log.debug('view_admin_security_permissions_all')
 
     params = request.json_body
-    page = params['page'] if 'page' in params else { 'order': 'id', 'direction': 'asc', 'items': 0, 'offset': 0 }
+    page = params['page'] if 'page' in params else { 'order': 'id', 'direction': 'asc', 'items': 10, 'offset': 0 }
     order = page['order'] if 'order' in page else ''
     direction = page['direction'] if 'direction' in page else ''
     offset = page['offset'] if 'offset' in page else 0
@@ -258,6 +262,103 @@ def view_admin_security_roles_all(request):
                 'roles': result
             }
         }
+    except Exception as e:
+        log.error(e)
+        return {
+            'status': False,
+            'errors': [ str(e) ]
+        }
+
+# users
+@view_config(
+    route_name='admin_security_users_all',
+    request_method=('POST','OPTIONS'),
+    renderer='json'
+)
+def view_admin_security_users_all(request):
+    log.debug('view_admin_security_users_all')
+
+    params = request.json_body
+    page = params['page'] if 'page' in params else { 'order': 'id', 'direction': 'asc', 'items': 0, 'offset': 0 }
+    order = page['order'] if 'order' in page else ''
+    direction = page['direction'] if 'direction' in page else ''
+    offset = page['offset'] if 'offset' in page else 0
+    items = page['items'] if 'items' in page else 10
+
+    try:
+        d = request.data
+        dp = d.get_data_provider('admin.security')
+
+        result = dp.users_get('id','asc', items, offset)
+        return {
+            'status': True,
+            'data': {
+                'users': result
+            }
+        }
+    except Exception as e:
+        log.error(e)
+        return {
+            'status': False,
+            'errors': [ str(e) ]
+        }
+
+
+@view_config(
+    route_name='admin_security_users_get',
+    request_method=('POST','OPTIONS'),
+    renderer='json'
+)
+def view_admin_security_users_get(request):
+    log.debug('view_admin_security_users_get')
+
+    params = request.json_body
+    user_id = params['id'] if 'id' in params else ''
+
+    try:
+        d = request.data
+        dp = d.get_data_provider('admin.security')
+
+        result = dp.user_get(user_id)
+        (user_id, active, created, email) = result
+        return {
+            'status': True,
+            'data': {
+                'user': {
+                    'id': user_id,
+                    'active': active,
+                    'created': created,
+                    'email': email
+                }
+            }
+        }
+    except Exception as e:
+        log.error(e)
+        return {
+            'status': False,
+            'errors': [ str(e) ]
+        }
+
+
+@view_config(
+    route_name='admin_security_users_create',
+    request_method=('POST','OPTIONS'),
+    renderer='json'
+)
+def view_admin_security_users_create(request):
+    log.debug('view_admin_security_users_create')
+
+    params = request.json_body
+    email = params['email'] if 'email' in params else ''
+    clients = params['clients'] if 'clients' in params else []
+    
+    try:
+        d = request.data
+        uo = UserOperations()
+        result = uo.signup_create(d, Mail(request), email)
+        log.debug(result)
+
+        return result
     except Exception as e:
         log.error(e)
         return {
