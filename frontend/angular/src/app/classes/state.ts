@@ -17,6 +17,7 @@
 import * as fromUser from './reducers/user';
 import * as fromMessages from './reducers/messages';
 import { ActionReducerMap } from '@ngrx/store';
+import { User } from './user';
 
 export interface State {
     user: fromUser.State;

@@ -9,12 +9,14 @@
     <table class="table">
       <thead>
         <tr>
+          <th>Active</th>
           <th>Name</th>
+          <th>Description</th>
         </tr>
       </thead>
       <tfoot>
         <tr>
-          <td>
+          <td colspan="3">
             <nav class="pager" aria-label="pager">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#" title="Previous">Previous</a></li>
@@ -29,7 +31,9 @@
       </tfoot>
       <tbody>
         <tr *ngFor="let p of permissions">
+          <td>{{ p.active }}</td>
           <td>{{ p.name }}</td>
+          <td>{{ p.description }}</td>
         </tr>
       </tbody>
     </table>

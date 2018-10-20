@@ -1,0 +1,12 @@
+<div class="wrapper-gis-map">
+  <div class="btn-toolbar" role="toolbar" aria-label="Clients Actions">
+    <div class="btn-group mr-2" role="group" aria-label="Important">
+      <button type="button" class="btn btn-secondary" (click)="pan()">Pan</button>
+    </div><!-- .btn-group -->
+  </div><!-- .btn-toolbar -->
+  <div class="wrapper-canvas" #wrapper>
+  </div><!-- .canvas -->
+  <div class="debug" *ngIf="viewport$ | async as viewport">
+    {{ viewport | json }}
+  </div>
+</div><!-- .wrapper-gis-map -->

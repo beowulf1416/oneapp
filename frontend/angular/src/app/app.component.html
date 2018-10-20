@@ -58,4 +58,7 @@
       </div><!-- .container-fluid -->
     </mat-sidenav-content>
   </mat-sidenav-container>
+  <div class="debug" *ngIf="user$ | async as user">
+    {{ user | json }}
+  </div>
 </div><!-- #wrapper-app -->

@@ -1,3 +1,62 @@
-<p>
-  items works!
-</p>
+<div class="wrapper-inv-items">
+  <div class="btn-toolbar" role="toolbar" aria-label="Client Actions">
+    <div class="btn-group mr-2" role="group" aria-label="Important">
+      <button type="button" class="btn btn-secondary" (click)="new()">New</button>
+    </div><!-- .btn-group -->
+  </div><!-- .btn-toolbar -->
+  <table class="table-items table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="table-items-header">
+          <span class="wrapper-header">
+            <div class="ui-col-header">
+              Name
+            </div><!-- .ui-col-header -->
+            <div class="ui-col-sort">
+              <button type="button" class="btn btn-light" (click)="sort()">
+                <i class="fas fa-sort"></i>  
+              </button>
+            </div><!-- .ui-col-sort -->
+            <div class="ui-col-filter">
+              <button type="button" class="btn btn-light" (click)="filter()">
+                <i class="fas fa-filter"></i>  
+              </button>
+            </div><!-- .ui-col-sort -->
+          </span><!-- .wrapper-header -->
+          <span class="ui-col-resize"></span>
+        </th>
+        <th class="table-items-header">
+          <span class="wrapper-header">
+            <div class="ui-col-header">
+              Description
+            </div><!-- .ui-col-header -->
+            <div class="ui-col-sort">
+              <button type="button" class="btn btn-light" (click)="sort()">
+                <i class="fas fa-sort"></i>  
+              </button>
+            </div><!-- .ui-col-sort -->
+            <div class="ui-col-filter">
+              <button type="button" class="btn btn-light" (click)="filter()">
+                <i class="fas fa-filter"></i>  
+              </button>
+            </div><!-- .ui-col-sort -->
+          </span><!-- .wrapper-header -->
+          <span class="ui-col-resize"></span>
+        </th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div><!-- .wrapper-inv-items -->

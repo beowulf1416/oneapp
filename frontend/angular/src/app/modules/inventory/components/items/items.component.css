@@ -1,0 +1,22 @@
+.wrapper-inv-items .table-items .table-items-header {
+    position: relative;
+}
+
+.wrapper-inv-items .table-items .ui-col-resize {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    width: 4px;
+    height: 100%;
+    cursor: col-resize;
+}
+
+.wrapper-inv-items .table-items .wrapper-header {
+    display: flex;
+}
+
+.wrapper-inv-items .table-items .wrapper-header .ui-col-header {
+    width: 100%;
+}

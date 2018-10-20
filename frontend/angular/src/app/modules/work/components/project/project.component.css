@@ -1,0 +1,25 @@
+.gantt {
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+.gantt tr {
+    border-top: solid 1px gray;
+}
+
+.gantt thead tr > th {
+    position: relative;
+}
+
+.gantt thead tr > th > span.ui-col-resize {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    width: 4px;
+    height: 100%;
+    cursor: col-resize;
+    border: 1px solid red;
+}

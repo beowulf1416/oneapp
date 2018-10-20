@@ -2,7 +2,7 @@
   <h2>Projects</h2>
   <div class="btn-toolbar" role="toolbar" aria-label="Clients Actions">
     <div class="btn-group mr-2" role="group" aria-label="Important">
-      <button type="button" class="btn btn-secondary" (click)="new()">New</button>
+      <button type="button" class="btn btn-secondary" (click)="save()">Save</button>
     </div><!-- .btn-group -->
   </div><!-- .btn-toolbar -->
   <mat-accordion>
@@ -29,7 +29,31 @@
 
       <div class="wrapper-tasks">
         <div class="container-fluid" style="display: block;">
-          
+          <table class="gantt">
+            <thead>
+              <tr>
+                <th>
+                  <span class="ui-col-resize" (mousedown)="mousedown_colresize($event)"></span>
+                  <span class="col-header">Task</span>
+                </th>
+                <th>
+                  <span class="ui-col-resize" (mousedown)="mousedown_colresize($event)"></span>
+                  <span class="col-header">Start</span>
+                </th>
+                <th>
+                  <span class="ui-col-resize" (mousedown)="mousedown_colresize($event)"></span>
+                  <span class="col-header">End</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of tasks">
+                <td>{{ t.name }}</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div><!-- .container-fluid -->
       </div><!-- .wrapper-tasks -->
 

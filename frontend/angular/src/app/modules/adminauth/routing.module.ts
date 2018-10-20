@@ -10,6 +10,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { RoleComponent } from './components/role/role.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
+import { AuthGuard } from 'src/app/classes/auth-guard';
 
 const routes: Routes = [
   {
@@ -25,14 +26,26 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.permissions.list'
+            },
             component: PermissionsComponent
           },
           {
             path: 'new',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.permissions.create'
+            },
             component: PermissionComponent
           },
           {
             path: ':id',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.permissions.view'
+            },
             component: PermissionComponent
           }
         ]
@@ -42,14 +55,26 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.roles.list'
+            },
             component: RolesComponent
           },
           {
             path: 'new',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.roles.create'
+            },
             component: RoleComponent
           },
           {
             path: ':id',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.roles.view'
+            },
             component: RoleComponent
           }
         ]
@@ -59,14 +84,26 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.users.list'
+            },
             component: UsersComponent
           },
           {
             path: 'new',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.users.create'
+            },
             component: UserComponent
           },
           {
             path: ':id',
+            canActivate: [ AuthGuard ],
+            data: {
+              permission: 'security.users.view'
+            },
             component: UserComponent
           }
         ]

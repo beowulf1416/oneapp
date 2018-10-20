@@ -1,0 +1,9 @@
+:host {
+    width: 100%;
+}
+
+.wrapper-canvas {
+    width: 100%;
+    height: calc(100vh - 150px);
+    border: solid 1px gray;
+}

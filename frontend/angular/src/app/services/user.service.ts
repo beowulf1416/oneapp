@@ -5,7 +5,10 @@ import { Store, select } from '@ngrx/store';
 
 import { Observable, NextObserver } from 'rxjs';
 
-import { State } from '../classes/reducers/user';
+import { State } from '../classes/state';
+import * as user from '../classes/reducers/user';
+// import { State } from '../classes/reducers/user';
+
 import { User } from '../classes/user';
 import { ApiResult } from '../classes/api-result';
 import { URLS } from '../classes/urls';
@@ -29,21 +32,14 @@ export class UserService {
     private s: Store<State>
   ) {
     this.user$ = s.pipe(
-      select((state: State) => state.user)
+      select((state: State) => state.user),
+      select((state: user.State) => state.user)
     );
-
-    // this.get_current_user().subscribe((r: ApiResult) => {
-    //   if (r.status) {
-    //     console.log(r);
-    //   } else {
-    //     console.error(r);
-    //   }
-    // });
   }
 
-  get_current_user(): Observable<ApiResult> {
-    return this.http.post<ApiResult>(URLS.api_get_current_user, JSON.stringify({}));
-  }
+  // get_current_user(): Observable<ApiResult> {
+  //   return this.http.post<ApiResult>(URLS.api_get_current_user, JSON.stringify({}));
+  // }
 
   sign_in(email: string, password: string): Observable<ApiResult> {
     return Observable.create((observer: NextObserver<ApiResult>) => {
@@ -53,18 +49,18 @@ export class UserService {
       })).subscribe((r: ApiResult) => {
         if (r.status) {
           console.log(r);
-          const user = r.data.user;
-          const token = r.data.token;
+          const u = r.data.user;
+          // const token = r.data.token;
+          const authenticated = u.authenticated;
+          const permissions = u.permissions;
 
-          // this.session.sessionStorage.setItem('token', token);
           const session = get_session_storage();
-          session.setItem('token', token);
+          session.setItem('email', email);
+          session.setItem('permissions', JSON.stringify(permissions));
 
-          // this.s.dispatch({
-          //   type: UserActions.USER_SIGNED_IN,
-          //   payload: user
-          // });
-          this.s.dispatch(new userActions.SignIn(new User(token, email)));
+          this.s.dispatch(new userActions.SignIn(
+            new User(email, authenticated, permissions)
+          ));
         } else {
           console.error(r);
         }
@@ -81,10 +77,12 @@ export class UserService {
 
         this.http.post<ApiResult>(URLS.api_sign_out, JSON.stringify({
         })).subscribe((r: ApiResult) => {
-          console.log(r);
+          if (r.status) {
+            const session = get_session_storage();
+            session.clear();
 
-          const session = get_session_storage();
-          session.removeItem('token');
+            this.s.dispatch(new userActions.SignOut());
+          }
 
           observer.next(r);
           observer.complete();

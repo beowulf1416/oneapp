@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.user.user_test();
+    this.user$.subscribe((u: User) => {
+      console.log(u);
+    });
   }
 
   toggle_sidenav() {

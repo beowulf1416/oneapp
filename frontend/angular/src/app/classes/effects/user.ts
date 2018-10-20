@@ -16,16 +16,21 @@ export class UserEffects {
 
     @Effect()
     init: Observable<Action> = defer(() => {
-        let token = this.storage.native_session_storage.getItem('token');
         let email = this.storage.native_session_storage.getItem('email');
-
-        if (token == null) {
-            token = '';
-        }
-
         if (email == null) {
             email = '';
         }
-        return new BehaviorSubject<Action>(new userActions.SignIn(new User(token, email)));
+
+        let tmp = this.storage.native_session_storage.getItem('permissions');
+        if (tmp == null) {
+            tmp = Array<string>();
+        } else {
+            console.log(JSON.parse(tmp));
+        }
+        console.log(tmp);
+
+        const permissions: Array<string> = tmp;
+
+        return new BehaviorSubject<Action>(new userActions.SignIn(new User(email, email !== '', permissions)));
     });
 }

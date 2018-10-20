@@ -6,13 +6,16 @@ export interface State {
 }
 
 export const initialState: State = {
-    user: new User('', '')
+    user: new User('', false, Array<string>())
 };
 
 export function reducer(state: State = initialState, action: UserActionsUnion ): State {
     switch (action.type) {
         case UserActionTypes.SIGN_IN: {
             return { ...state, user: action.payload };
+        }
+        case UserActionTypes.SIGN_OUT: {
+            return { ...state, user: new User('', false, Array<string>()) };
         }
         default: {
             return state;
