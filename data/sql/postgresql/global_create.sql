@@ -18,3 +18,5 @@ create domain email_address
 
 \ir clients/create.sql
 \ir security/create.sql
+--\ir www/create.sql
+\ir inventory/create.sql

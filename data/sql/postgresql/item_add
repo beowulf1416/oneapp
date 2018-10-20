@@ -1,0 +1,539 @@
+select * from www.session_data;
+set schema 'security';
+\dt
+\q
+set schema 'security';
+\i security/tables/security.sql
+\i security/tables/permissions.sql
+\dt
+t
+\q
+set schema 'security';
+\dt
+\df
+\i security/functions/permission_add.sql
+\i security/functions/permission_add.sql
+select * from permissions;
+\i security/functions/permission_get.sql
+\i security/tables/roles.sql
+\dt
+\i security/functions/role_add.sql
+\i security/functions/role_get.sql
+\df
+\q
+\dn
+\q
+\dn
+exit
+\q
+\dn
+select * from security.users;
+\q
+select * from www.sessions;
+select * from www.session_data;
+truncate www.session_data;
+truncate www.sessions;
+select * from www.session_data;
+select * from www.sessions;
+truncate www.sessions cascade;
+select * from www.sessions;
+truncate www.sessions cascade;
+truncate www.sessions cascade;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.sessions;
+truncate www.sessions cascade;
+use www;
+set schema 'www';
+\df
+\df
+\dS session_set
+\sf session_set
+select * from sessions;
+select * from session_data;
+truncate sessions cascade;
+select * from sessions;
+truncate sessions cascade;
+select * from sessions;
+select * from sessions_data;
+select * from session_data;
+select * from sessions;
+select * from security.users;
+select * from www.session_data sd inner join security.users u on sd.valu = u.id;
+select * from www.session_data sd inner join security.users u on sd.value = u.id;
+select * from www.session_data sd inner join security.users u on sd.value::integer = u.id;
+select * from www.session_data sd inner join security.users u on (sd.value::integer) = u.id;
+select * from www.session_data sd inner join security.users u on (sd.value::bigint) = u.id
+select * from www.session_data sd inner join security.users u on sd.value::integer = u.id where sd.key = 'user-id';
+select * from www.session_data sd inner join security.users u on sd.value::integer = u.id where sd.key = 'user-id' and sd.session_id = 'SID:ANON:localhost:AMuLSOsWZCsv6JUBoZPFNQ';
+select * from www.session_data sd inner join security.users u on sd.value::integer = u.id where sd.key = 'user-id';
+select * from www.sessions;
+truncate www.sessions cascade;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.sessions;
+truncate www.sessions cascade;
+truncate www.sessions cascade;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+\q
+select * from www.sessions;
+select * from www.session_data;
+truncate www.sessions cascade;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+truncate www.sessions cascade;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.sessions;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+select * from www.session_data;
+truncate www.sessions cascade;
+\q
+select * from www.sessions;
+truncate www.sessions cascade;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.session_data;
+\. dn
+\dn
+drop schema organizations cascade;
+drop schema security cascade;
+drop schema www cascade;
+\dn
+\. global_create.sql
+\?
+\i global_create.sql
+select * from security.signup('test@test.com','testing');
+select * from security.signups;
+select * from security.signups;
+select * from security.signups;
+select count(*), case when verified_ts is null then 0 else 1 end from security.signups where email = 'testing1@mailinator.com';
+select case when email is null then 0 else 1 end, case when verified_ts is null then 0 else 1 end from security.signups where email = 'testing1@mailinator.com';
+\i security/functions/get_signup.sql
+select * from security.get_signup('testing1@mailinator.com');
+select * from security.signups
+;
+\i security/functions/get_signup.sql
+select * from security.get_signup('testing1@mailinator.com');
+\i security/functions/get_user_by_email.sql
+\i security/functions/get_user_by_email.sql
+\i security/tables/users.sql
+\i security/tables/users.sql
+\i security/functions/get_user_by_email.sql
+\i security/functions/add_signup.sql
+\dn
+set schema 'security';
+\dt
+\df
+\q
+\dn
+set schema 'security';
+\df
+\i global_drop.sql
+\i global_create.sql
+set schema 'security';
+\df
+select * from security.signups;
+select * from security.signups;
+select * from security.signups;
+\df
+set schema 'security';
+\i security/functions/update_verify_signup.sql
+\i security/functions/update_verify_signup.sql
+\i security/functions/update_verify_signup.sql
+\i security/functions/update_verify_signup.sql
+select * from security.signups;
+select * from security.users;
+\i security/functions/update_verify_signup.sql
+select * from security.signups;
+\i security/functions/update_verify_signup.sql
+select * from security.signups;
+\i security/functions/update_verify_signup.sql
+select * from security.signups;
+\dn
+set schema 'security';
+\i security/functions/authenticate.sql
+select * from security.authenticate('testing1@mailinator.com','testingtime');
+\df
+\i security/functions/get_user_by_email.sql
+\i security/functions/authenticate.sql
+\i security/functions/get_user_by_email.sql
+\i global_drop.sql
+\i global_create.sql
+\i security/functions/get_user_by_email.sql
+select * from security.signups;
+select * from security.signups;
+select * from security.users;
+select * from security.users;
+\dn
+select * from security.users;
+\i security/tables/tokens.sql
+\i security/functions/update_signin_token.sql
+set schema 'security';
+\i security/tables/tokens.sql
+\i security/functions/update_signin_token.sql
+drop table tokens;
+\i security/tables/tokens.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/get_user_from_signin_token.sql
+\df
+\i security/functions/get_user_from_token.sql
+\df
+\df
+select * from security.tokens;
+select * from security.tokens;
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+\i security/functions/update_signin_token.sql
+select * from security.tokens
+;
+select * from security.tokens;
+select * from security.tokens;
+\i global_drop.sql
+\i global_create.sql
+set schema 'security';
+\dt
+\df
+select * from security.users;
+select * from security.signups;
+select * from security.tokens;
+set schema 'security';
+\i security/functions/is_user_allowed.sql
+\i security/functions/is_user_allowed.sql
+\dt
+\i global_drop.sql
+\i global_create.sql
+\i global_drop.sql
+\i global_create.sql
+\i global_drop.sql
+\i global_create.sql
+set schema 'security';
+\dt
+\i security/functions/is_user_allowed.sql
+select * from security.signups;
+select * from security.signups;
+select * from security.signups;
+select * from security.users;
+select * from security.users;
+select * from security.signups;
+\q
+select * from security.users;
+set schema 'security';
+\i security/functions/permission_create.sql
+\i security/functions/permission_create.sql
+select * from security.permissions;
+select * from security.permissions;
+set schema 'security';
+\i security/functions/permission_get.sql
+\i security/functions/permissions_get.sql
+\i security/functions/permissions_get.sql
+\i security/functions/permissions_get.sql
+\i security/functions/permissions_get.sql
+select * from  security.permissions_get(10,0);
+drop function permissions_get;
+\i security/functions/permissions_get.sql
+drop function security.permissions_get;
+\i security/functions/permissions_get.sql
+select * from security.permissions_get('name','desc',10,0);
+\i security/functions/permissions_get.sql
+select * from security.permissions_get('name','desc',10,0);
+\i security/functions/permissions_get.sql
+select * from security.permissions_get('name','desc',10,0);
+drop function permissions_get;
+select * from security.permissions_get('name','desc',10,0);
+\i security/functions/permissions_get.sql
+select * from security.permissions_get('name','desc',10,0);
+\i security/functions/permissions_get.sql
+select * from security.permissions_get('name','desc',10,0);
+select * from security.permissions_get('name','des',10,0);
+select * from security.permissions;
+set schema 'security';
+\i security/functions/roles_get.sql
+\i security/functions/role_get.sql
+\i security/functions/role_create.sql
+select * from security.roles;
+exit
+;
+\i global_drop.sql
+\i global_create.sql
+\dn
+set schema 'clients';
+\dt
+\df
+\i global_drop.sql
+\i global_create.sql
+set schema 'clients';
+\df
+select * from clients.clients;
+select * from clients.clients;
+\i global_drop.sql
+\i global_create.sql
+select * from clients.clients;
+select * from clients.clients;
+\d
+\dn
+select * from clients.clients;
+set schema 'security';
+\i security/functions/users_get.sql
+\dt
+\dT users
+\?
+\d users
+\i security/functions/users_get.sql
+\i security/functions/users_get.sql
+\ds
+\df
+select * from security.users;
+select * from security.users;
+select string_agg(substr(characters, random() * 10)::integer, 1) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select string_agg(substr(characters, (random() * 10)::integer, 1) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+);
+select string_agg(substr(characters, (random()*10)::integer, 1)) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select string_agg(substr(characters, random()*10, 1)) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select string_agg(substr(characters, random()*10), 1) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select string_agg(substr(characters, random()*10), 1) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select * from (values('abcdefghijklmnopqrstuvwxyz'));
+select * from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substr(characters, 10, 1) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substr(characters, 10) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substring(characters, 10) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substring(characters from 1 to 10) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substring(characters from 1 for 10) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substr(characters from 1 for 10) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substr(characters, 1,10) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substr(characters, 1,10) from (values('abcdefghijklmnopqrstuvwxyz')) as characters;
+select substr(characters, 1,10) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters);
+select string_agg(substr(characters, random()*length(characters) + 1,10), 1) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters);
+select substr(characters, random()*length(characters) + 1,10) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters);
+select substr(characters, (random()*length(characters))::integer + 1,1) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters);
+select substr(characters, (random()*length(characters))::integer + 1,1) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters);
+select substr(characters, (random()*length(characters))::integer + 1,1) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters);
+select substr(characters, (random()*length(characters))::integer + 1,1) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters) jjoin generate_series(1,15) on 1 = 1;
+select substr(characters, (random()*length(characters))::integer + 1,1) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters) join generate_series(1,15) on 1 = 1;
+select string_agg(substr(characters, (random()*length(characters))::integer + 1,1)) from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters) join generate_series(1,15) on 1 = 1;
+select string_agg(substr(characters, (random()*length(characters))::integer + 1,1), '') from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters) join generate_series(1,15) on 1 = 1;
+select string_agg(substr(characters, (random()*length(characters))::integer + 1,1), '') from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters) join generate_series(1,15) on 1 = 1;
+select string_agg(substr(characters, (random()*length(characters))::integer + 1,1), '') from (values('abcdefghijklmnopqrstuvwxyz')) as symbols(characters) join generate_series(1,15) on 1 = 1;
+select * from security.users;
+select * from security.users;
+set schema 'security';
+\df
+\i security/functions/add_user_to_client.sql
+\i security/functions/remove_user_from_clients.sql
+\i security/functions/remove_user_from_clients.sql
+\i security/functions/remove_user_from_clients.sql
+select * from signups;
+select * from security.users;
+\i security/functions/user_get.sql
+\i security/functions/user_get.sql
+\dn
+\. global_create.sql
+\?
+\i global_create.sql
+use www;
+set schema 'www';
+\df
+select * from security.users;
+select * from www.session_create(1);
+select * from www.sessions;
+select * from www.sessions;
+truncate www.sessions;
+select * from www.sessions;
+select * from www.sessions;
+select * from www.sessions;
+drop function www.session_create;
+\i www/functions/session_create.sql
+drop table www.sessions;
+drop function www.session_create;
+drop function www.session_data;
+\dt
+drop table www.session_data;
+\d
+\dt
+\i www/tables/sessions.sql
+\i www/tables/session_data.sql
+\i www/functions/session_create.sql
+select * from www.sessions;
+select * from www.sessions;
+select * from www.sessions;
+\dt
+set schema 'security';
+\dt
+set schema 'security';
+drop function is_user_allowed;
+\i security/functions/is_user_allowed.sql
+select * from security.is_user_allowed(1,'security.users.list');
+drop function is_user_allowed;
+\i security/functions/is_user_allowed.sql
+select * from security.is_user_allowed(1,'security.users.list');
+drop function is_user_allowed;
+\i security/functions/is_user_allowed.sql
+\i security/functions/is_user_allowed.sql
+\dn
+select * from clients;
+select * from clients.clients;
+\i global_drop.sql
+\dn
+drop schema www cascade;
+\dn
+\i global_create.sql
+select * from clients.clients;
+\i global_initialize_data.sql
+\i global_initialize_data.sql
+select * from clients.clients;
+\i global_drop.sql
+\i global_create.sql
+\i global_initialize_data.sql
+\d clients.clients;
+select * from clients.clients;
+\i global_initialize_data.sql
+select client_id;
+declare client_id bigint;
+client_id bigint;
+declare @client_id bigint;
+client_id bigint;
+select * from clients.clients;
+\i clients/init.sql
+commit;
+rollback;
+\i security/init.sql
+\i clients/init.sql
+\i global_drop.sql
+\dn
+\i global_create.sql
+\i global_init.sql
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+\d security.user_create
+\sf security.user_create
+\df security.user_create
+set schema 'security';
+\df
+\i security/functions/user_create.sql
+\d security.users
+\i security/functions/user_create.sql
+select * from clients.clients;
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+\sf security.user_create
+\i security/functions/user_create.sql
+\sf security.user_create
+\sf public.user_create
+set schema 'security';
+\df
+set schema 'security';
+\i security/functions/user_create.sql
+\i security/functions/user_create.sql
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+select * from clients.clients;
+select * from security.users;
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+select * from security.permissions;
+select * from security.roles;
+select * from security.role_permissions;
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+perform security.add_permission_to_role(1,1);
+select * from security.role_permissions;
+perform * from security.add_permission_to_role(1,1);
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+selecr * from security.user_roles;
+select * from security.user_roles;
+select * from security.role_permissions;
+set schema 'security';
+\i security/functions/user_get_permissions.sql
+select security.user_get_permissions(1);
+select * from security.user_get_permissions(1);
+exit
+\q
+select * from security.users;
+select * from security.roles;
+\i security/init.sql
+select * from security.roles;
+select * from security.permissions;
+\i global_drop.sql
+\i global_create.sql
+\i global_init.sql
+select * from security.permissions;
+select * from security.role_permissions;
+\q
+\dt
+\i global_create.sql
+\dt
+\dn
+set schema 'clients';
+\dt
+set schema 'inventory';
+\dt
+\i global_drop.sql
+\dn
+\i global_create.sql
+\i global_drop.sql
+\dn
+\i global_create.sql
+\i global_drop.sql
+\i global_drop.sql
+\i global_create.sql
+set schema 'inventory';
+\i inventory/functions/item_add.sql
+select * from clients.clients;
+\ir clients/init.sql
+select * from clients.clients;
+\i inventory/init.sql
+\i inventory/init.sql
+set schema 'inventory';
+\dt
+\d items
+\i inventory/init.sql
+\i inventory/functions/item_add.sql
+\i inventory/init.sql
+\i inventory/init.sql
+select * from inventory.items;
+\d items
+\i inventory/functions/item_add.sql
+\s item_add

@@ -1,5 +1,6 @@
 create or replace function user_create (
-    p_email security.users.name%type
+    p_email security.users.email%type,
+    p_pw security.users.pw%type
 )
 returns security.users.id%type
 as $$
@@ -11,7 +12,7 @@ begin
         pw
     ) values (
         p_email,
-        public.crypt(p_email, public.gen_salt('md5'))
+        public.crypt(p_pw, public.gen_salt('md5'))
     )
     returning currval(pg_get_serial_sequence('security.users', 'id')) into tmp;
 
