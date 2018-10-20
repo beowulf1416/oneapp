@@ -12,6 +12,9 @@ class AuthorizationPolicy:
     def __init__(self, provider):
         self._provider = provider
 
+    def principals_allowed_by_permission(context, permission):
+        log.debug('AuthorizationPolicy::principals_allowed_by_permission')
+
     def permits(self, context, principals, permission):
         log.debug(context)
         log.debug(principals)
@@ -19,9 +22,10 @@ class AuthorizationPolicy:
 
         if (principals is not None):
             for p in principals:
-                result = self._provider.is_allowed(p, permission)
+                if (self._provider.is_allowed(p, permission)):
+                    return True
 
-        return Allowed
+        return False
 
 
     def principals_allowed_by_permission(context, permission):

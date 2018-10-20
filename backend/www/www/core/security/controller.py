@@ -156,7 +156,7 @@ def view_user_signin(request):
         d = request.data
         dp = d.get_data_provider('authentication')
 
-        authentic = dp.authenticate(email, pw)
+        (authentic, ) = dp.authenticate(email, pw)
         if (authentic):
             user = dp.get_user_by_email(email)
             if (user is None):
@@ -166,36 +166,19 @@ def view_user_signin(request):
                 }
 
             (user_id, active, created_ts, email, last_signed_ts) = user
-            token = secrets.token_urlsafe(16) # todo hardcoded constant
-            result = dp.update_signin_token(user_id, token)
+            remember(request, user_id)
 
-            # jwt_token = request.create_jwt_token(
-            #     token,
-            #     email=email
-            # )
-            jwt_token = jwt.encode(
-                {
-                    'token': token
-                },
-                request.registry.settings['app.jwt.secret'],
-                request.registry.settings['jwt.algorithm']
-            )
-            log.debug(jwt_token)
-
-            remember(request, token)
+            result = dp.permissions(user_id)
+            permissions = [p[0] for p in result]
 
             return {
                 'status': True,
                 'data': {
-                    'authenticated': authentic,
                     'user': {
-                        'id': user_id,
-                        # 'active': active,
-                        # 'created': created_ts,
                         'email': email,
-                        # 'last_signed': last_signed_ts
-                    },
-                    'token': jwt_token.decode('utf-8')
+                        'authenticated': authentic,
+                        'permissions': permissions
+                    }
                 }
             }
         else:
@@ -220,6 +203,8 @@ def view_user_signin(request):
 )
 def view_user_signout(request):
     log.debug('view_user_signout')
+
+    headers = forget(request)
 
     return {
         'status': True,

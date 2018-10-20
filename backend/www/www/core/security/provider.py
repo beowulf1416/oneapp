@@ -118,12 +118,23 @@ class SecurityDataProvider(Provider):
             log.error(e)
             raise e
 
-    def is_allowed(self, user_token, permission):
-        sql = 'select * from security.is_user_allowed(%s,%s)'
+    def permissions(self, user_id):
+        log.debug('SecurityDataProvider::permissions')
+        sql = 'select * from security.user_get_permissions(%s)'
         try:
-            result = self.fetch_one(sql, (user_token, permission))
+            result = self.fetch_all(sql, (user_id, ))
             log.debug(result)
             return result
+        except Exception as e:
+            log.error(e)
+            raise e
+
+    def is_allowed(self, user_id, permission):
+        log.debug('SecurityDataProvider::is_allowed')
+        sql = 'select * from security.is_user_allowed(%s,%s)'
+        try:
+            (allowed, ) = self.fetch_one(sql, (user_id, permission))
+            return allowed
         except Exception as e:
             log.error(e)
             raise e

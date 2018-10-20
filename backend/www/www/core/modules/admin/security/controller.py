@@ -273,7 +273,8 @@ def view_admin_security_roles_all(request):
 @view_config(
     route_name='admin_security_users_all',
     request_method=('POST','OPTIONS'),
-    renderer='json'
+    renderer='json',
+    permission='security.users.list'
 )
 def view_admin_security_users_all(request):
     log.debug('view_admin_security_users_all')
@@ -307,7 +308,8 @@ def view_admin_security_users_all(request):
 @view_config(
     route_name='admin_security_users_get',
     request_method=('POST','OPTIONS'),
-    renderer='json'
+    renderer='json',
+    permission='security.users.get'
 )
 def view_admin_security_users_get(request):
     log.debug('view_admin_security_users_get')
@@ -343,7 +345,8 @@ def view_admin_security_users_get(request):
 @view_config(
     route_name='admin_security_users_create',
     request_method=('POST','OPTIONS'),
-    renderer='json'
+    renderer='json',
+    permission='security.users.create'
 )
 def view_admin_security_users_create(request):
     log.debug('view_admin_security_users_create')

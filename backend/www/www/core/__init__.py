@@ -2,8 +2,11 @@ import logging
 log = logging.getLogger(__name__)
 
 # from pyramid.authorization import ACLAuthorizationPolicy
+from www.core.common.session import SessionFactory
 from www.core.security.authorization_policy import AuthorizationPolicy
 from www.core.security.authentication_policy import AuthenticationPolicy
+# from pyramid.session import PickleSerializer
+import json
 from pyramid.renderers import JSON
 import datetime
 
@@ -31,6 +34,13 @@ def includeme(config):
     manager = get_data(None)
     dp = manager.get_data_provider('authentication')
 
+    settings = config.get_settings()
+    cookie_name = settings['app.cookie']
+
+    config.set_session_factory(SessionFactory(
+        json,
+        cookie_name
+    ))
     config.set_authentication_policy(AuthenticationPolicy(dp))
     config.set_authorization_policy(AuthorizationPolicy(dp))
     # config.set_jwt_authentication_policy('thisisasecret')

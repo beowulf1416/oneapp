@@ -21,6 +21,7 @@ class SecurityDataProvider(Provider):
 
     # permissions
     def permission_create(self, name, description):
+        log.debug('SecurityDataprovider::permission_create')
         sql = 'select * from security.permission_create(%s,%s)'
         try:
             result = self.fetch_one(sql, (name, description))
@@ -30,6 +31,7 @@ class SecurityDataProvider(Provider):
             raise e
     
     def permission_get(self, id):
+        log.debug('SecurityDataprovider::permission_get')
         sql = 'select * from security.permission_get(%s)'
         try:
             result = self.fetch_one(sql, (id, ))
@@ -39,6 +41,7 @@ class SecurityDataProvider(Provider):
             raise e
 
     def permissions_get(self, order, direction, items, offset):
+        log.debug('SecurityDataprovider::permissions_get')
         sql = 'select * from security.permissions_get(%s, %s, %s,%s)'
         try:
             result = self.fetch_all(sql, (order, direction, items, offset))
@@ -59,6 +62,7 @@ class SecurityDataProvider(Provider):
 
     # roles
     def role_create(self, name, description):
+        log.debug('SecurityDataprovider::role_create')
         sql = 'select * from security.role_create(%s,%s)'
         try:
             result = self.fetch_one(sql, (name, description))
@@ -68,6 +72,7 @@ class SecurityDataProvider(Provider):
             raise e
     
     def role_get(self, id):
+        log.debug('SecurityDataprovider::role_get')
         sql = 'select * from security.role_get(%s)'
         try:
             result = self.fetch_one(sql, (id, ))
@@ -77,6 +82,7 @@ class SecurityDataProvider(Provider):
             raise e
 
     def roles_get(self, order, direction, items, offset):
+        log.debug('SecurityDataprovider::roles_get')
         sql = 'select * from security.roles_get(%s, %s, %s,%s)'
         try:
             result = self.fetch_all(sql, (order, direction, items, offset))
@@ -96,6 +102,7 @@ class SecurityDataProvider(Provider):
             raise e
 
     def users_get(self, order, direction, items, offset):
+        log.debug('SecurityDataprovider::users_get')
         sql = 'select * from security.users_get(%s, %s, %s,%s)'
         try:
             result = self.fetch_all(sql, (order, direction, items, offset))
@@ -114,6 +121,7 @@ class SecurityDataProvider(Provider):
             raise e
 
     def user_get(self, id):
+        log.debug('SecurityDataprovider::user_get')
         sql = 'select * from security.user_get(%s)'
         try:
             result = self.fetch_one(sql, (id, ))
@@ -122,11 +130,15 @@ class SecurityDataProvider(Provider):
             log.error(e)
             raise e
 
-    def user_create(self, email):
-        sql = 'select * from security.user_create(%s)'
+    def user_create(self, email, pw):
+        log.debug('SecurityDataprovider::user_create')
+        sql = 'select * from security.user_create(%s, %s)'
         try:
-            result = self.fetch_one(sql, (email, ))
+            result = self.fetch_one(sql, (email, pw))
             return result
         except Exception as e:
             log.error(e)
             raise e
+
+    # def is_allowed(self, user_id, permission):
+    #     log.debug('SecurityDataProvider::is_allowed')
