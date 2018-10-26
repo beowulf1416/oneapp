@@ -1,6 +1,11 @@
 # oneapp
 one and only app
 
+Features
+* permission based security
+* user definable roles
+* multi-tenant
+
 database
 * postgresql
 * all database access is thru stored procedures
