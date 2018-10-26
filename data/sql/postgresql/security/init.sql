@@ -73,6 +73,12 @@ begin
         permission_id;
     perform security.add_permission_to_role(permission_id, role_id);
 
+    select
+        security.permission_create('security.roles.permissions', 'view permissions assigned to role')
+        into
+        permission_id;
+    perform security.add_permission_to_role(permission_id, role_id);
+
 
 
     select

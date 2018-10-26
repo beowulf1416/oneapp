@@ -1,4 +1,6 @@
 create or replace function items_get (
+    sort_col varchar,
+    sort_dir varchar,
     pager_rows int,
     pager_offset int
 )
@@ -16,6 +18,14 @@ returns table (
 )
 as $$
 begin
+    if lower(sort_col) not in ('id','name','description') then
+        raise exception 'unknown sort column';
+    end if;
+
+    if lower(sort_dir) not in ('asc','desc','ascending','descending') then
+        raise exception 'unknown value for sort direction';
+    end if;
+
     return query execute format(
         'select
             a.id,
@@ -29,8 +39,13 @@ begin
             a.sku,
             a.perishable
         from inventory.items a
-        '
-    );
+        order by %s %s
+        limit $1
+        offset $2
+        ',
+        sort_col,
+        sort_dir
+    ) using pager_rows, pager_offset;
 end;
 $$
 language plpgsql;

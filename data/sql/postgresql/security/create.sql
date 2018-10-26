@@ -36,6 +36,7 @@ set schema 'security';
 \ir functions/role_create.sql
 \ir functions/role_get.sql
 \ir functions/roles_get.sql
+\ir functions/roles_permissions_get.sql
 
 /* users */
 \ir functions/user_create.sql
